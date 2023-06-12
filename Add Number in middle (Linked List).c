@@ -57,6 +57,25 @@ void print()
     }
 }
 
+void reversePrint()
+{
+    struct Node *printNode =Root;
+
+    if (Root ==NULL)
+        printf("Not create linked list yet\n");
+
+    else
+    {
+        printNode=Last;
+        printf("\n\nThe list in reverse are : \n\n");
+        while (printNode!=NULL)
+        {
+            printf(" Data = %d\n",printNode->Data);
+            printNode=printNode->Previous;
+        }
+    }
+}
+
 void addNumberMiddle (int value, int node)
 {
     struct Node *tempurary=(struct Node*) malloc (sizeof(struct Node));
@@ -76,33 +95,38 @@ void addNumberMiddle (int value, int node)
         {
             if(i==node-1)
             {
-                addNodePrevious=addNodeNext;
+                addNodePrevious=addNodeNext;/// add node previous value
+
             }
 
             addNodeNext=addNodeNext->Next;
             i++;
         }
 
+
+
         if(addNodeNext==NULL)
             insert(value);
 
         else
         {
-            addNodeNext=addNodeNext->Previous;
+
+            addNodeNext=addNodeNext->Previous; /// add node next value
+
 
             tempurary->Data=value;
             tempurary->Next=NULL;
             tempurary->Previous=NULL;
 
+            tempurary->Previous= addNodeNext->Previous;
+            tempurary->Next= addNodePrevious->Next;
+            addNodeNext->Previous= tempurary;
             addNodePrevious->Next=tempurary;
-            addNodeNext->Previous=tempurary;
-            tempurary->Next=addNodeNext;
         }
-
     }
-
-
 }
+
+
 
 int main()
 {
